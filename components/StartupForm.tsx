@@ -4,6 +4,7 @@ import React from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
+import { SendIcon } from "lucide-react";
 
 import Input from "./ui/Input";
 import Textarea from "./ui/Textarea";
@@ -32,6 +33,7 @@ const StartupForm = () => {
 	);
 
 	const { errors, isValid } = formState;
+	const isSubmittingDisabled = !isValid || isPending;
 	// const mergedErrors = { ...errors, ..._.error }; TODO: handle server-side errors
 
 	return (
@@ -79,8 +81,18 @@ const StartupForm = () => {
 					/>
 				)}
 			/>
-			<button type="submit" disabled={!isValid || isPending} className="startup-form_btn">
-				{isPending ? "Submitting..." : "Submit"}
+			<button
+				type="submit"
+				disabled={isSubmittingDisabled}
+				className={`startup-form_btn ${isSubmittingDisabled ? "opacity-70 cursor-not-allowed" : ""}`}
+			>
+				{isPending ? (
+					"Submitting..."
+				) : (
+					<span className="flex gap-1 items-center justify-center">
+						Submit your pitch <SendIcon />
+					</span>
+				)}
 			</button>
 		</form>
 	);

@@ -51,7 +51,9 @@ export default async function StartupPage({ params }: { params: Promise<{ id: st
 							<p className="text-16-medium !text-black-300">@{startup.author?.username}</p>
 						</div>
 					</Link>
-					<span className="category-tag">{startup.category}</span>
+					<Link href={`/?query=${startup.category}`} className="category-tag">
+						{startup.category}
+					</Link>
 				</div>
 				<h3 className="text-30-bold">Pitch Details</h3>
 				{parsedPitchToHtml ? (

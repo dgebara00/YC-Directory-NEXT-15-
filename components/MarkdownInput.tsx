@@ -79,7 +79,7 @@ const MarkdownInput = ({ content, onChange, onBlur, label, error, disabled }: Pr
 		return null;
 	}
 	return (
-		<label onClick={() => editor?.chain().focus().run()} className="flex flex-col gap-1 w-full">
+		<span className="flex flex-col gap-1 w-full">
 			<span className="startup-form_label">{label}</span>
 			<div className="border-3 border-black w-full relative rounded-[20px] overflow-hidden pb-3 mt-3">
 				<div className="flex w-full items-center py-2 px-2 justify-between border-b  sticky top-0 left-0 bg-background z-20">
@@ -111,7 +111,7 @@ const MarkdownInput = ({ content, onChange, onBlur, label, error, disabled }: Pr
 				</div>
 			</div>
 			<p className={`min-h-5 text-sm text-destructive mt-1 ${error ? "visible" : "invisible"}`}>{error}</p>
-		</label>
+		</span>
 	);
 };
 
