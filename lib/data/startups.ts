@@ -10,10 +10,11 @@ import { startupSchema } from "../schemas";
 import { StartupActionState } from "../types";
 
 export const createStartup = async (
-	_: StartupActionState,
 	formData: FormData,
 	{ additionalField: { pitch } }: { additionalField: { pitch: string } }
-): Promise<StartupActionState> => {
+): Promise<StartupActionState | void> => {
+	let docId: string | null = null;
+
 	try {
 		const user = await requireUser();
 		const td = new turndown();
@@ -38,20 +39,22 @@ export const createStartup = async (
 			},
 		});
 
-		redirect(`/startup/${createdDoc._id}`);
+		docId = createdDoc._id;
 	} catch (error) {
-		console.log("🚀 ~ createStartup ~ error:", error);
 		if (error instanceof z.ZodError) {
 			const formattedErrors = error.flatten().fieldErrors;
+
 			return {
-				success: false,
-				error: formattedErrors,
+				errors: formattedErrors,
 			};
 		}
 
 		return {
-			success: false,
-			error: { root: (error as Error).message },
+			errors: { root: (error as Error).message },
 		};
+	}
+
+	if (docId) {
+		redirect(`/startup/${docId}`);
 	}
 };

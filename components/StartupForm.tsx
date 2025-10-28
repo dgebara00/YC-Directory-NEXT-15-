@@ -16,8 +16,7 @@ import { StartupActionState } from "@/lib/types";
 type Schema = z.infer<typeof schema>;
 
 const initialState: StartupActionState = {
-	success: false,
-	error: {},
+	errors: {},
 };
 
 const StartupForm = () => {
@@ -27,8 +26,8 @@ const StartupForm = () => {
 	});
 
 	const [, formAction, isPending] = React.useActionState(
-		(prevData: StartupActionState, formData: FormData) =>
-			createStartup(prevData, formData, { additionalField: { pitch: watch("pitch") } }),
+		(_: StartupActionState | void, formData: FormData) =>
+			createStartup(formData, { additionalField: { pitch: watch("pitch") } }),
 		initialState
 	);
 
