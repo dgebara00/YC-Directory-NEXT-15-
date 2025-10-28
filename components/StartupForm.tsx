@@ -26,7 +26,7 @@ const StartupForm = () => {
 		mode: "onBlur",
 	});
 
-	const [_, formAction, isPending] = React.useActionState(
+	const [, formAction, isPending] = React.useActionState(
 		(prevData: StartupActionState, formData: FormData) =>
 			createStartup(prevData, formData, { additionalField: { pitch: watch("pitch") } }),
 		initialState

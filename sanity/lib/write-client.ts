@@ -9,4 +9,5 @@ export const writeClient = createClient({
 	dataset,
 	apiVersion,
 	token: writeToken,
+	useCdn: true,
 });

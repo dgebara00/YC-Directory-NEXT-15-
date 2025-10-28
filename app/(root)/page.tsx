@@ -1,8 +1,8 @@
-import SearchInput from "../components/SearchInput";
-import StartupCard from "../components/StartupCard";
-import { STARTUPS_QUERY } from "../sanity/lib/queries";
-import { type StartupCardWithAuthorType } from "../components/StartupCard";
-import { sanityFetch, SanityLive } from "../sanity/lib/live";
+import SearchInput from "@/components/SearchInput";
+import StartupCard from "@/components/StartupCard";
+import { STARTUPS_QUERY } from "../../sanity/lib/queries";
+import { type StartupCardWithAuthorType } from "@/components/StartupCard";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ query?: string }> }) {
 	const { query } = await searchParams;

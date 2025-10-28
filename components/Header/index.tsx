@@ -17,7 +17,7 @@ const WithSession = () => {
 };
 
 const Header = () => {
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 	const [isAuthLoaderVisible, setIsAuthLoaderVisible] = React.useState(false);
 
 	const handleSignIn = async () => {
@@ -38,7 +38,10 @@ const Header = () => {
 				{session ? (
 					<Authenticated userId={session.user.githubId} avatarUrl={session.user.image} />
 				) : (
-					<NotAuthenticated isAuthLoaderVisible={isAuthLoaderVisible} handleSignIn={handleSignIn} />
+					<NotAuthenticated
+						isAuthLoaderVisible={isAuthLoaderVisible || status === "loading"}
+						handleSignIn={handleSignIn}
+					/>
 				)}
 			</nav>
 		</header>

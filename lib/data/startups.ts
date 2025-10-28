@@ -40,6 +40,7 @@ export const createStartup = async (
 
 		redirect(`/startup/${createdDoc._id}`);
 	} catch (error) {
+		console.log("🚀 ~ createStartup ~ error:", error);
 		if (error instanceof z.ZodError) {
 			const formattedErrors = error.flatten().fieldErrors;
 			return {

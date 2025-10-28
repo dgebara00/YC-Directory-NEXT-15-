@@ -14,7 +14,6 @@ type Props = {
 
 const UserPage = async ({ params }: Props) => {
 	const session = await auth();
-	console.log("🚀 ~ UserPage ~ session:", session);
 	const { id } = await params;
 	const parsedId = Number(id);
 	const user = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, { id: parsedId });
